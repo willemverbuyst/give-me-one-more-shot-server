@@ -9,6 +9,11 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@faker-js/faker@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-7.4.0.tgz#cac720d860a89d487b47e55e66a4fd114f1d3fe5"
+  integrity sha512-xDd3Tvkt2jgkx1LkuwwxpNBy/Oe+LkZBTwkgEFTiWpVSZgQ5sc/LenbHKRHbFl0dq/KFeeq/szyyPtpJRKY0fg==
+
 "@jridgewell/resolve-uri@^3.0.3":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@jridgewell/resolve-uri/-/resolve-uri-3.1.0.tgz#2203b118c157721addfe69d47b70465463066d78"
@@ -211,6 +216,11 @@ braces@~3.0.2:
   integrity sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==
   dependencies:
     fill-range "^7.0.1"
+
+bsn-js@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/bsn-js/-/bsn-js-1.0.4.tgz#7f84f57178f229055426f4492056dbd2ddeec2c4"
+  integrity sha512-uSJYVYt4jUVRJW7suOELQj+vGFoGFkf32xpqefMDz8jxFPk2moknHc3uWeH+eThVNQr55nLyz/kvc+C4h7VboA==
 
 bytes@3.1.2:
   version "3.1.2"
