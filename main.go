@@ -1,19 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
-
-type patient struct {
-	Birthdate  string `json:"birthdate"`
-	BSN        string `json:"BSN"`
-	Email      string `json:"email"`
-	FamilyName string `json:"familyName"`
-	Gender     string `json:"gender"`
-	GivenName  string `json:"givenName"`
-}
 
 var patients = []patient{{
 	Birthdate:  "02/09/2011",
@@ -33,6 +25,8 @@ var patients = []patient{{
 	}}
 
 func getPatients(context *gin.Context) {
+	gender := createPatient()
+	fmt.Println(gender)
 	context.IndentedJSON(http.StatusOK, patients)
 }
 
