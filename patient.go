@@ -1,6 +1,7 @@
 package main
 
 type patient struct {
+	ID         string `json:"id"`
 	Birthdate  string `json:"birthdate"`
 	BSN        string `json:"BSN"`
 	Email      string `json:"email"`

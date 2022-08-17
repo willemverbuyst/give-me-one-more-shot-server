@@ -6,6 +6,7 @@ POST http://localhost:9090/patients HTTP/1.1
 content-type: application/json
 
 {
+	"id":         "3",
   "birthdate":  "08/01/1999",
 	"BSN":        "999999999",
 	"email":      "b@b.com",
@@ -13,3 +14,7 @@ content-type: application/json
 	"gender":     "Male",
 	"givenName":  "Piwe"
 }
+
+###
+GET http://localhost:9090/patients/1A HTTP/1.1
+content-type: application/json
