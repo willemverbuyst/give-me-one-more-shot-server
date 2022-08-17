@@ -1,6 +1,7 @@
 package main
 
 type patient struct {
+	Active     bool   `json:"active"`
 	ID         string `json:"id"`
 	Birthdate  string `json:"birthdate"`
 	BSN        string `json:"BSN"`

@@ -9,6 +9,7 @@ import (
 )
 
 var patients = []patient{{
+	Active:     true,
 	ID:         "1A",
 	Birthdate:  "02/09/2011",
 	BSN:        "123123123",
@@ -18,6 +19,7 @@ var patients = []patient{{
 	GivenName:  "Wong",
 },
 	{
+		Active:     true,
 		ID:         "2B",
 		Birthdate:  "03/11/1998",
 		BSN:        "12456789",
@@ -56,6 +58,18 @@ func getPatient(context *gin.Context) {
 	context.IndentedJSON(http.StatusOK, patient)
 }
 
+func updatePatient(context *gin.Context) {
+	id := context.Param("id")
+	patient, error := getPatientById(id)
+
+	if error != nil {
+		context.IndentedJSON(http.StatusNotFound, gin.H{"message": "Patient not found"})
+	}
+
+	patient.Active = !patient.Active
+	context.IndentedJSON(http.StatusOK, patient)
+}
+
 func getPatientById(id string) (*patient, error) {
 	for i, p := range patients {
 		if p.ID == id {
@@ -69,6 +83,7 @@ func main() {
 	router := gin.Default()
 	router.GET("/patients", getPatients)
 	router.GET("/patients/:id", getPatient)
+	router.PATCH("/patients/:id", updatePatient)
 	router.POST("/patients", addPatient)
 	router.Run("localhost:9090")
 
