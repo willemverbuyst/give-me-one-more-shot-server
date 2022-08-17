@@ -18,7 +18,7 @@ type bsn struct {
 }
 
 func getRandomGender() string {
-	rand.Seed(time.Now().Unix())
+	rand.Seed(time.Now().UnixNano())
 
 	genders := gender{"Female", "Male", "Other"}
 	randomGender := genders[rand.Intn(len(genders))]

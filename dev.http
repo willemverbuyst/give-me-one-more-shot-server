@@ -6,7 +6,7 @@ POST http://localhost:9090/patients HTTP/1.1
 content-type: application/json
 
 {
-	"id":         "3",
+	"id":         "c5e9d44f-6c37-4740-b59f-d90223cc3474",
   "birthdate":  "08/01/1999",
 	"BSN":        "999999999",
 	"email":      "b@b.com",
@@ -17,9 +17,9 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:9090/patients/1A HTTP/1.1
+GET http://localhost:9090/patients/c5e9d44f-6c37-4740-b59f-d90223cc3474 HTTP/1.1
 content-type: application/json
 
 ###
-PATCH  http://localhost:9090/patients/1A HTTP/1.1
+PATCH  http://localhost:9090/patients/c5e9d44f-6c37-4740-b59f-d90223cc3474 HTTP/1.1
 content-type: application/json

@@ -8,26 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var patients = []patient{{
-	Active:     true,
-	ID:         "1A",
-	Birthdate:  "02/09/2011",
-	BSN:        "123123123",
-	Email:      "a@a.io",
-	FamilyName: "Hay",
-	Gender:     "Female",
-	GivenName:  "Wong",
-},
-	{
-		Active:     true,
-		ID:         "2B",
-		Birthdate:  "03/11/1998",
-		BSN:        "12456789",
-		Email:      "b@b.io",
-		FamilyName: "Foo",
-		Gender:     "Male",
-		GivenName:  "Bar",
-	}}
+var patients = createDummyPatients()
 
 func getPatients(context *gin.Context) {
 	gender := createPatient()
