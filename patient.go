@@ -11,6 +11,7 @@ type patient struct {
 
 func createPatient() string {
 	gender := getRandomGender()
+	bsn := getRandomBSN()
 
-	return gender
+	return gender + "---" + bsn
 }
