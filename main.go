@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"net/http"
 
@@ -51,15 +50,6 @@ func updatePatient(context *gin.Context) {
 	context.IndentedJSON(http.StatusOK, patient)
 }
 
-func getPatientById(id string) (*patient, error) {
-	for i, p := range patients {
-		if p.ID == id {
-			return &patients[i], nil
-		}
-	}
-	return nil, errors.New("patient not found")
-}
-
 func main() {
 	router := gin.Default()
 	router.GET("/patients", getPatients)
@@ -67,5 +57,4 @@ func main() {
 	router.PATCH("/patients/:id", updatePatient)
 	router.POST("/patients", addPatient)
 	router.Run("localhost:9090")
-
 }

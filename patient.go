@@ -1,6 +1,8 @@
 package main
 
 import (
+	"errors"
+
 	"github.com/google/uuid"
 )
 
@@ -35,4 +37,13 @@ func createDummyPatients() []patient {
 		dummyPatients = append(dummyPatients, createPatient())
 	}
 	return dummyPatients
+}
+
+func getPatientById(id string) (*patient, error) {
+	for i, p := range patients {
+		if p.ID == id {
+			return &patients[i], nil
+		}
+	}
+	return nil, errors.New("patient not found")
 }
