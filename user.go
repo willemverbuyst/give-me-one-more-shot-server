@@ -33,7 +33,7 @@ type user struct {
 
 type response []user
 
-func getUsers() {
+func getUsers() []user {
 	resp, err := http.Get("https://jsonplaceholder.typicode.com/users/")
 	if err != nil {
 		fmt.Println("No response from request")
@@ -47,14 +47,5 @@ func getUsers() {
 		log.Fatal("could not read body")
 	}
 
-	// fmt.Println(PrettyPrint(result))
-
-	for _, rec := range result {
-		fmt.Println(rec.Name)
-	}
-}
-
-func PrettyPrint(i interface{}) string {
-	s, _ := json.MarshalIndent(i, "", "\t")
-	return string(s)
+	return result
 }

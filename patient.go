@@ -17,12 +17,12 @@ type patient struct {
 	ID         string `json:"id"`
 }
 
-func createPatient() patient {
+func createPatient(userName string) patient {
 	active := true
 	birthDate := "12/12/2012"
 	bsn := getRandomBSN()
 	email := "a@a.com"
-	familyName := "AAA"
+	familyName := userName
 	gender := getRandomGender()
 	givenName := "BBB"
 	id := uuid.New().String()
@@ -32,10 +32,11 @@ func createPatient() patient {
 }
 
 func createDummyPatients() []patient {
-	getUsers()
+	users := getUsers()
 	dummyPatients := []patient{}
-	for i := 1; i < 11; i++ {
-		dummyPatients = append(dummyPatients, createPatient())
+	for i := 1; i < 10; i++ {
+		userName := users[i].Name
+		dummyPatients = append(dummyPatients, createPatient(userName))
 	}
 	return dummyPatients
 }
