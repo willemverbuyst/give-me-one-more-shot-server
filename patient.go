@@ -32,6 +32,7 @@ func createPatient() patient {
 }
 
 func createDummyPatients() []patient {
+	getUsers()
 	dummyPatients := []patient{}
 	for i := 1; i < 11; i++ {
 		dummyPatients = append(dummyPatients, createPatient())

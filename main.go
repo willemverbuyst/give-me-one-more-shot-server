@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -10,8 +9,6 @@ import (
 var patients = createDummyPatients()
 
 func getPatients(context *gin.Context) {
-	gender := createPatient()
-	fmt.Println(gender)
 	context.IndentedJSON(http.StatusOK, patients)
 }
 
