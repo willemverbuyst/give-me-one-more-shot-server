@@ -3,6 +3,7 @@ package main
 import (
 	"math/rand"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -31,6 +32,24 @@ func getRandomNumber() int {
 	randomNumber := rand.Intn(10)
 
 	return randomNumber
+}
+
+func getRandomEmailSuffix() string {
+	rand.Seed(time.Now().UnixNano())
+
+	s := gender{"io", "com", "org"}
+	randomSuffix := s[rand.Intn(len(s))]
+
+	return randomSuffix
+}
+
+func getRandomDate() string {
+	min := time.Date(1950, 1, 0, 0, 0, 0, 0, time.UTC).Unix()
+	max := time.Date(2020, 1, 0, 0, 0, 0, 0, time.UTC).Unix()
+	delta := max - min
+
+	sec := rand.Int63n(delta) + min
+	return time.Unix(sec, 0).Format("2006-01-02")
 }
 
 func getRandomBSN() string {
@@ -75,4 +94,24 @@ func splitInt(n int) []int {
 		n = n / 10
 	}
 	return slc
+}
+
+func removePrefixFromName(name string) string {
+	elements := strings.Split(name, " ")
+
+	for i, e := range elements {
+		if strings.HasSuffix(e, ".") {
+			elements = append(elements[:i], elements[i+1:]...)
+		}
+	}
+
+	return strings.Join(elements, " ")
+}
+
+func createEmailWithName(name string) string {
+	elements := strings.Split(name, " ")
+	suffix := getRandomEmailSuffix()
+	email := elements[0] + "@" + elements[1] + "." + suffix
+
+	return email
 }
