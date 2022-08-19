@@ -2,7 +2,9 @@ package main
 
 import (
 	"errors"
+	"math/rand"
 	"strings"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -18,11 +20,11 @@ type patient struct {
 	ID         string `json:"id"`
 }
 
-func createPatient(f string, g string) patient {
+func createPatient(f string, g string, e string) patient {
 	active := true
 	birthDate := "12/12/2012"
 	bsn := getRandomBSN()
-	email := "a@a.com"
+	email := e
 	familyName := f
 	gender := getRandomGender()
 	givenName := g
@@ -42,8 +44,9 @@ func createDummyPatients() []patient {
 
 		familyName := strings.Split(name, " ")[0]
 		givenName := strings.Join(strings.Split(name, " ")[1:], " ")
+		email := createEmailWithName(name)
 
-		dummyPatients = append(dummyPatients, createPatient(familyName, givenName))
+		dummyPatients = append(dummyPatients, createPatient(familyName, givenName, email))
 	}
 	return dummyPatients
 }
@@ -67,4 +70,21 @@ func removePrefixFromName(name string) string {
 	}
 
 	return strings.Join(elements, " ")
+}
+
+func createEmailWithName(name string) string {
+	elements := strings.Split(name, " ")
+	suffix := getRandomEmailSuffix()
+	email := elements[0] + "@" + elements[1] + "." + suffix
+
+	return email
+}
+
+func getRandomEmailSuffix() string {
+	rand.Seed(time.Now().UnixNano())
+
+	s := gender{"io", "com", "org"}
+	randomSuffix := s[rand.Intn(len(s))]
+
+	return randomSuffix
 }
