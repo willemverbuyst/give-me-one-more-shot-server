@@ -22,7 +22,7 @@ type patient struct {
 
 func createPatient(f string, g string, e string) patient {
 	active := true
-	birthDate := "12/12/2012"
+	birthDate := getRandomDate()
 	bsn := getRandomBSN()
 	email := e
 	familyName := f
@@ -87,4 +87,13 @@ func getRandomEmailSuffix() string {
 	randomSuffix := s[rand.Intn(len(s))]
 
 	return randomSuffix
+}
+
+func getRandomDate() string {
+	min := time.Date(1950, 1, 0, 0, 0, 0, 0, time.UTC).Unix()
+	max := time.Date(2020, 1, 0, 0, 0, 0, 0, time.UTC).Unix()
+	delta := max - min
+
+	sec := rand.Int63n(delta) + min
+	return time.Unix(sec, 0).Format("2006-01-02")
 }
