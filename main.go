@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -49,6 +50,8 @@ func updatePatient(context *gin.Context) {
 
 func main() {
 	router := gin.Default()
+	router.Use(cors.Default())
+
 	router.GET("/patients", getPatients)
 	router.GET("/patients/:id", getPatient)
 	router.PATCH("/patients/:id", updatePatient)
