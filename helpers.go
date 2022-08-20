@@ -113,5 +113,5 @@ func createEmailWithName(name string) string {
 	suffix := getRandomEmailSuffix()
 	email := elements[0] + "@" + elements[1] + "." + suffix
 
-	return email
+	return strings.ToLower(email)
 }
