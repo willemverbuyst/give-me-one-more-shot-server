@@ -1,4 +1,4 @@
-module github.com/willemverbuyst/give-me-one-more-shot/go-server
+module github.com/willemverbuyst/give-me-one-more-shot/server
 
 go 1.17
 

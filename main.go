@@ -48,13 +48,18 @@ func updatePatient(context *gin.Context) {
 	context.IndentedJSON(http.StatusOK, patient)
 }
 
+func welcomeWorld(context *gin.Context) {
+	context.IndentedJSON(http.StatusOK, gin.H{"message": "hello world"})
+}
+
 func main() {
 	router := gin.Default()
 	router.Use(cors.Default())
 
+	router.GET("/", welcomeWorld)
 	router.GET("/patients", getPatients)
 	router.GET("/patients/:id", getPatient)
 	router.PATCH("/patients/:id", updatePatient)
 	router.POST("/patients", addPatient)
-	router.Run("localhost:9090")
+	router.Run(":9090")
 }
