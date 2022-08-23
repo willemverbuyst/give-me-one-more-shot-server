@@ -2,13 +2,42 @@ version: '3'
 
 services:
   server:
+    depends_on:
+      - roach
     build:
       context: .
       dockerfile: Dockerfile
     container_name: gmoms-server
     hostname: gmoms-server
+    networks:
+      - gmoms-net
     ports:
       - 9090:9090
+    environment:
+      - PGUSER=${PGUSER:-someone}
+      - PGPASSWORD=${PGPASSWORD:-mypassword}
+      - PGHOST=${PGHOST:-db}
+      - PGPORT=${PGPORT:-26257}
+      - PGDATABASE=${PGDATABASE:-mydb}
     deploy:
       restart_policy:
         condition: on-failure
+  roach:
+    image: cockroachdb/cockroach:latest-v20.1
+    container_name: roach
+    hostname: db
+    networks:
+      - gmoms-net
+    ports:
+      - 26257:26257
+      - 8080:8080
+    volumes:
+      - roach:/cockroach/cockroach-data
+    command: start-single-node --insecure
+
+volumes:
+  roach:
+
+networks:
+  gmoms-net:
+    driver: bridge
