@@ -11,7 +11,7 @@ type MessageID struct {
 
 type Message struct {
 	ID        string         `gorm:"primaryKey" json:"id"`
-	Message   string         `json:"message" binding:"required"`
+	Content   string         `json:"message" binding:"required"`
 	CreatedAt int64          `gorm:"autoCreateTime:milli" json:"created_at"`
 	UpdatedAt int64          `gorm:"autoUpdateTime:milli" json:"updated_at"`
 	DeletedAt gorm.DeletedAt `json:"deleted_at"`

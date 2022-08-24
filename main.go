@@ -1,10 +1,13 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/willemverbuyst/give-me-one-more-shot/server/message"
+	"github.com/willemverbuyst/give-me-one-more-shot/server/model"
 )
 
 var patients = createDummyPatients()
@@ -52,17 +55,18 @@ func welcomeWorld(context *gin.Context) {
 	context.IndentedJSON(http.StatusOK, gin.H{"message": "hello world"})
 }
 
-func getMessage(context *gin.Context) {
-	context.IndentedJSON(http.StatusOK, gin.H{"message": "testing the db"})
-}
-
 func main() {
+	db, err := model.Database()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	db.DB()
 
 	router := gin.Default()
 	router.Use(cors.Default())
 
 	router.GET("/", welcomeWorld)
-	router.GET("/info", getMessage)
+	router.GET("/messages", message.GetMessages)
 	router.GET("/patients", getPatients)
 	router.GET("/patients/:id", getPatient)
 	router.PATCH("/patients/:id", updatePatient)
