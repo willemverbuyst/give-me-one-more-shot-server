@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gin-contrib/cors"
@@ -53,18 +52,17 @@ func welcomeWorld(context *gin.Context) {
 	context.IndentedJSON(http.StatusOK, gin.H{"message": "hello world"})
 }
 
+func getMessage(context *gin.Context) {
+	context.IndentedJSON(http.StatusOK, gin.H{"message": "testing the db"})
+}
+
 func main() {
-	db, err := initStore()
-	if err != nil {
-		log.Fatalf("failed to initialise the store: %s", err)
-	}
 
 	router := gin.Default()
 	router.Use(cors.Default())
 
-	defer db.Close()
-
 	router.GET("/", welcomeWorld)
+	router.GET("/info", getMessage)
 	router.GET("/patients", getPatients)
 	router.GET("/patients/:id", getPatient)
 	router.PATCH("/patients/:id", updatePatient)
