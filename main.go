@@ -67,6 +67,7 @@ func main() {
 
 	router.GET("/", welcomeWorld)
 	router.GET("/messages", message.GetMessages)
+	router.POST("messages", message.PostMessage)
 	router.GET("/patients", getPatients)
 	router.GET("/patients/:id", getPatient)
 	router.PATCH("/patients/:id", updatePatient)
