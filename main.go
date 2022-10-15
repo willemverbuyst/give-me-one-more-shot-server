@@ -15,12 +15,18 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	db.DB()
+	_, dbErr := db.DB()
+	if dbErr != nil {
+		log.Fatal("Error when starting the database:", err)
+	}
 
 	router := gin.Default()
 	router.Use(cors.Default())
 	routes.PatientRoute(router)
 	routes.RootRoute(router)
 
-	router.Run(":9090")
+	sErr := router.Run(":9090")
+	if sErr != nil {
+		log.Fatal("Error when running the server:", err)
+	}
 }
