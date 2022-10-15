@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"give-me-one-more-shot/server/models"
-	"give-me-one-more-shot/server/routes"
+	"server/models"
+	"server/routes"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"

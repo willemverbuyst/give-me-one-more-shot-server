@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"give-me-one-more-shot/server/helpers"
-	"give-me-one-more-shot/server/models"
 	"net/http"
+	"server/helpers"
+	"server/models"
 
 	"github.com/gin-gonic/gin"
 )

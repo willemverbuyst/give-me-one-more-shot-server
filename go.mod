@@ -1,4 +1,4 @@
-module give-me-one-more-shot/server
+module server
 
 go 1.17
 

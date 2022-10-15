@@ -2,8 +2,8 @@ package helpers
 
 import (
 	"errors"
-	"give-me-one-more-shot/server/models"
 	"math/rand"
+	"server/models"
 	"strconv"
 	"strings"
 	"time"

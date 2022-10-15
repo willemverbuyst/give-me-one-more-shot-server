@@ -3,9 +3,9 @@ package helpers
 import (
 	"encoding/json"
 	"fmt"
-	"give-me-one-more-shot/server/models"
 	"log"
 	"net/http"
+	"server/models"
 )
 
 type response []models.User
