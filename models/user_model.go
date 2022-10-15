@@ -1,11 +1,4 @@
-package main
-
-import (
-	"encoding/json"
-	"fmt"
-	"log"
-	"net/http"
-)
+package models
 
 type Address struct {
 	Street  string `json:"street"`
@@ -24,7 +17,7 @@ type Company struct {
 	BS          string `json:"bs"`
 }
 
-type user struct {
+type User struct {
 	ID       int    `json:"id"`
 	Name     string `json:"name"`
 	UserName string `json:"username"`
@@ -35,21 +28,11 @@ type user struct {
 	Company
 }
 
-type response []user
-
-func getUsers() []user {
-	resp, err := http.Get("https://jsonplaceholder.typicode.com/users/")
-	if err != nil {
-		fmt.Println("No response from request")
-	}
-	defer resp.Body.Close()
-
-	var result response
-	e := json.NewDecoder(resp.Body).Decode(&result) // response body is []byte
-
-	if e != nil {
-		log.Fatal("could not read body")
-	}
-
-	return result
+type BSN struct {
+	Leading int `json:"leading"`
+	I4      int `json:"i4"`
+	I5      int `json:"i5"`
+	I6      int `json:"i6"`
+	I7      int `json:"i7"`
+	I8      int `json:"i8"`
 }

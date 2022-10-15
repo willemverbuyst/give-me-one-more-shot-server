@@ -23,15 +23,3 @@ content-type: application/json
 ###
 PATCH  http://localhost:9090/patients/c5e9d44f-6c37-4740-b59f-d90223cc3474 HTTP/1.1
 content-type: application/json
-
-###
-GET http://localhost:9090/messages HTTP/1.1
-content-type: application/json
-
-###
-POST http://localhost:9090/mesSages HTTP/1.1
-content-type: application/json
-
-{
-	"content": "blabla"
-}
