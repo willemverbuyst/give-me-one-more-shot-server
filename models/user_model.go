@@ -19,7 +19,7 @@ type Company struct {
 
 type User struct {
 	Active   bool   `json:"active"`
-	ID       string `json:"id"`
+	ID       int    `json:"id"`
 	Name     string `json:"name"`
 	UserName string `json:"username"`
 	Email    string `json:"eamil"`

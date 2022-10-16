@@ -1,8 +1,8 @@
 package config
 
 import (
+	"give-me-one-more-shot/server/models"
 	"log"
-	"server/models"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"

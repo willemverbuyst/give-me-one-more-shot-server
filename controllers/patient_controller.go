@@ -1,9 +1,10 @@
 package controllers
 
 import (
+	"give-me-one-more-shot/server/helpers"
+	"give-me-one-more-shot/server/models"
+	"give-me-one-more-shot/server/responses"
 	"net/http"
-	"server/helpers"
-	"server/models"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,7 +14,7 @@ var patients = helpers.CreateDummyPatients(users)
 
 func GetPatients() gin.HandlerFunc {
 	return func(context *gin.Context) {
-		context.IndentedJSON(http.StatusOK, patients)
+		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "Hello World", Data: users})
 	}
 }
 
@@ -36,7 +37,7 @@ func GetPatient() gin.HandlerFunc {
 		patient, error := helpers.GetPatientById(id, patients)
 
 		if error != nil {
-			context.IndentedJSON(http.StatusNotFound, gin.H{"message": "Patient not found"})
+			context.IndentedJSON(http.StatusNotFound, responses.UserResponse{Status: http.StatusNotFound, Message: "Patient not found", Data: nil})
 		}
 
 		context.IndentedJSON(http.StatusOK, patient)
@@ -49,7 +50,7 @@ func UpdatePatient() gin.HandlerFunc {
 		patient, error := helpers.GetPatientById(id, patients)
 
 		if error != nil {
-			context.IndentedJSON(http.StatusNotFound, gin.H{"message": "Patient not found"})
+			context.IndentedJSON(http.StatusNotFound, responses.UserResponse{Status: http.StatusNotFound, Message: "Patient not found", Data: nil})
 		}
 
 		patient.Active = !patient.Active

@@ -3,6 +3,7 @@ package controllers
 import (
 	"give-me-one-more-shot/server/helpers"
 	"give-me-one-more-shot/server/models"
+	"give-me-one-more-shot/server/responses"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -10,7 +11,7 @@ import (
 
 func GetUsers() gin.HandlerFunc {
 	return func(context *gin.Context) {
-		context.IndentedJSON(http.StatusOK, users)
+		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "All users", Data: nil})
 	}
 }
 
@@ -33,7 +34,7 @@ func GetUser() gin.HandlerFunc {
 		user, error := helpers.GetUserById(id, users)
 
 		if error != nil {
-			context.IndentedJSON(http.StatusNotFound, gin.H{"message": "User not found"})
+			context.IndentedJSON(http.StatusNotFound, responses.UserResponse{Status: http.StatusNotFound, Message: "User not found", Data: nil})
 		}
 
 		context.IndentedJSON(http.StatusOK, user)
@@ -46,7 +47,7 @@ func UpdateUser() gin.HandlerFunc {
 		user, error := helpers.GetUserById(id, users)
 
 		if error != nil {
-			context.IndentedJSON(http.StatusNotFound, gin.H{"message": "User not found"})
+			context.IndentedJSON(http.StatusNotFound, responses.UserResponse{Status: http.StatusNotFound, Message: "User not found", Data: nil})
 		}
 
 		user.Active = !user.Active

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"give-me-one-more-shot/server/responses"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -8,6 +9,6 @@ import (
 
 func WelcomeWorld() gin.HandlerFunc {
 	return func(context *gin.Context) {
-		context.IndentedJSON(http.StatusOK, gin.H{"message": "hello world"})
+		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "Hello World", Data: nil})
 	}
 }
