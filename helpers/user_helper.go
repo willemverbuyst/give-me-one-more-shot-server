@@ -7,6 +7,7 @@ import (
 	"give-me-one-more-shot/server/models"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 type response []models.User
@@ -30,7 +31,11 @@ func GetUsers() response {
 
 func GetUserById(id string, users []models.User) (*models.User, error) {
 	for i, u := range users {
-		if u.ID == id {
+		idStr, err := strconv.Atoi(id)
+		if err != nil {
+			log.Fatal("Conversion of id did not work")
+		}
+		if u.ID == idStr {
 			return &users[i], nil
 		}
 	}
