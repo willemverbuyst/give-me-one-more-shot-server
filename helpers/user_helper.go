@@ -2,10 +2,11 @@ package helpers
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
+	"give-me-one-more-shot/server/models"
 	"log"
 	"net/http"
-	"server/models"
 )
 
 type response []models.User
@@ -25,4 +26,13 @@ func GetUsers() response {
 	}
 
 	return result
+}
+
+func GetUserById(id string, users []models.User) (*models.User, error) {
+	for i, u := range users {
+		if u.ID == id {
+			return &users[i], nil
+		}
+	}
+	return nil, errors.New("user not found")
 }
