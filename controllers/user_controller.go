@@ -11,7 +11,7 @@ import (
 
 func GetUsers() gin.HandlerFunc {
 	return func(context *gin.Context) {
-		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "All users", Data: nil})
+		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "All users", Data: users})
 	}
 }
 
@@ -24,7 +24,7 @@ func AddUser() gin.HandlerFunc {
 		}
 
 		users = append(users, u)
-		context.IndentedJSON(http.StatusCreated, users)
+		context.IndentedJSON(http.StatusCreated, responses.UserResponse{Status: http.StatusOK, Message: "User created", Data: users})
 	}
 }
 
@@ -37,7 +37,7 @@ func GetUser() gin.HandlerFunc {
 			context.IndentedJSON(http.StatusNotFound, responses.UserResponse{Status: http.StatusNotFound, Message: "User not found", Data: nil})
 		}
 
-		context.IndentedJSON(http.StatusOK, user)
+		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "One user", Data: user})
 	}
 }
 
@@ -51,6 +51,6 @@ func UpdateUser() gin.HandlerFunc {
 		}
 
 		user.Active = !user.Active
-		context.IndentedJSON(http.StatusOK, user)
+		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "User updated", Data: user})
 	}
 }

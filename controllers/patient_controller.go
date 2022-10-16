@@ -14,7 +14,7 @@ var patients = helpers.CreateDummyPatients(users)
 
 func GetPatients() gin.HandlerFunc {
 	return func(context *gin.Context) {
-		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "Hello World", Data: users})
+		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "All patients", Data: patients})
 	}
 }
 
@@ -27,7 +27,7 @@ func AddPatient() gin.HandlerFunc {
 		}
 
 		patients = append(patients, p)
-		context.IndentedJSON(http.StatusCreated, patients)
+		context.IndentedJSON(http.StatusCreated, responses.UserResponse{Status: http.StatusOK, Message: "Patient created", Data: patients})
 	}
 }
 
@@ -40,7 +40,7 @@ func GetPatient() gin.HandlerFunc {
 			context.IndentedJSON(http.StatusNotFound, responses.UserResponse{Status: http.StatusNotFound, Message: "Patient not found", Data: nil})
 		}
 
-		context.IndentedJSON(http.StatusOK, patient)
+		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "One patient", Data: patient})
 	}
 }
 
@@ -54,6 +54,6 @@ func UpdatePatient() gin.HandlerFunc {
 		}
 
 		patient.Active = !patient.Active
-		context.IndentedJSON(http.StatusOK, patient)
+		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "Patient updated", Data: patient})
 	}
 }
