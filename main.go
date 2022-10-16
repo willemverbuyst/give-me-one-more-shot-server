@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"server/models"
+	"server/config"
 	"server/routes"
 
 	"github.com/gin-contrib/cors"
@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	db, err := models.Database()
+	db, err := config.Database()
 	if err != nil {
 		log.Fatalln(err)
 	}

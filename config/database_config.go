@@ -1,7 +1,8 @@
-package models
+package config
 
 import (
 	"log"
+	"server/models"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -15,7 +16,7 @@ func Database() (*gorm.DB, error) {
 		log.Fatal(err.Error())
 	}
 
-	if err = db.AutoMigrate(&Message{}); err != nil {
+	if err = db.AutoMigrate(&models.Message{}); err != nil {
 		log.Println(err)
 	}
 
