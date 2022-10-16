@@ -11,7 +11,7 @@ COPY go.sum ./
 
 RUN go mod download && go mod verify
 
-COPY *.go ./
+COPY ./ ./
 
 RUN go build -o /go-server
 
@@ -24,6 +24,8 @@ FROM gcr.io/distroless/base-debian10
 WORKDIR /
 
 COPY --from=build /go-server /go-server
+
+COPY database.db ./
 
 EXPOSE 9090
 
