@@ -1,0 +1,11 @@
+host: localhost:9090
+info:
+  contact: {}
+  description: Give Me One More Shot service API in Go using Gin framework.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Give Me One More Shot API
+  version: "1.0"
+paths: {}
+swagger: "2.0"
