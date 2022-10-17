@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"give-me-one-more-shot/server/responses"
+	"give-me-one-more-shot/server/api/responses"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

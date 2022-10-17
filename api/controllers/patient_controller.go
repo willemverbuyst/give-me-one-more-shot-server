@@ -1,9 +1,10 @@
 package controllers
 
 import (
-	"give-me-one-more-shot/server/helpers"
-	"give-me-one-more-shot/server/models"
-	"give-me-one-more-shot/server/responses"
+	"give-me-one-more-shot/server/api/helpers"
+	"give-me-one-more-shot/server/api/models"
+	"give-me-one-more-shot/server/api/responses"
+
 	"net/http"
 
 	"github.com/gin-gonic/gin"

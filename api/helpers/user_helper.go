@@ -4,7 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"give-me-one-more-shot/server/models"
+	"give-me-one-more-shot/server/api/models"
+
 	"log"
 	"net/http"
 	"strconv"

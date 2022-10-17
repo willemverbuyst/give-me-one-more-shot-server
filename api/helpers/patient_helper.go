@@ -2,7 +2,7 @@ package helpers
 
 import (
 	"errors"
-	"give-me-one-more-shot/server/models"
+	"give-me-one-more-shot/server/api/models"
 	"math/rand"
 
 	"strconv"

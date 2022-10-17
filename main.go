@@ -1,8 +1,8 @@
 package main
 
 import (
-	"give-me-one-more-shot/server/config"
-	"give-me-one-more-shot/server/routes"
+	"give-me-one-more-shot/server/api/config"
+	"give-me-one-more-shot/server/api/routes"
 	"log"
 
 	"github.com/gin-contrib/cors"
