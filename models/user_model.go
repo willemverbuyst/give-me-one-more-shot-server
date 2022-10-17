@@ -18,15 +18,15 @@ type Company struct {
 }
 
 type User struct {
-	Active   bool   `json:"active"`
-	ID       int    `json:"id"`
-	Name     string `json:"name"`
-	UserName string `json:"username"`
-	Email    string `json:"eamil"`
-	Phone    string `json:"phone"`
-	Website  string `json:"website"`
-	Address
-	Company
+	Active   bool    `json:"active"`
+	ID       int     `json:"id"`
+	Name     string  `json:"name"`
+	UserName string  `json:"username"`
+	Email    string  `json:"email"`
+	Phone    string  `json:"phone"`
+	Website  string  `json:"website"`
+	Address  Address `json:"address"`
+	Company  Company `json:"company"`
 }
 
 type BSN struct {
