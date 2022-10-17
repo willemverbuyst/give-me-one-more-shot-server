@@ -30,15 +30,6 @@ func getRandomNumber() int {
 	return randomNumber
 }
 
-func getRandomEmailSuffix() string {
-	rand.Seed(time.Now().UnixNano())
-
-	s := gender{"io", "com", "org"}
-	randomSuffix := s[rand.Intn(len(s))]
-
-	return randomSuffix
-}
-
 func getRandomDate() string {
 	min := time.Date(1950, 1, 0, 0, 0, 0, 0, time.UTC).Unix()
 	max := time.Date(2020, 1, 0, 0, 0, 0, 0, time.UTC).Unix()
@@ -104,14 +95,6 @@ func removePrefixFromName(name string) string {
 	return strings.Join(elements, " ")
 }
 
-func createEmailWithName(name string) string {
-	elements := strings.Split(name, " ")
-	suffix := getRandomEmailSuffix()
-	email := elements[0] + "@" + elements[1] + "." + suffix
-
-	return strings.ToLower(email)
-}
-
 func createPatient(f string, g string, e string) models.Patient {
 	active := true
 	birthDate := getRandomDate()
@@ -141,7 +124,7 @@ func CreateDummyPatients(users []models.User) []models.Patient {
 		name := removePrefixFromName(users[i].Name)
 		familyName := strings.Split(name, " ")[0]
 		givenName := strings.Join(strings.Split(name, " ")[1:], " ")
-		email := createEmailWithName(name)
+		email := users[i].Email
 		dummyPatients = append(dummyPatients, createPatient(familyName, givenName, email))
 	}
 	return dummyPatients
