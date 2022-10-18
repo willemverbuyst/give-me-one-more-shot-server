@@ -1,7 +1,6 @@
 package helpers
 
 import (
-	"errors"
 	"give-me-one-more-shot/server/api/models"
 	"math/rand"
 
@@ -130,11 +129,11 @@ func CreateDummyPatients(users []models.User) []models.Patient {
 	return dummyPatients
 }
 
-func GetPatientById(id string, patients []models.Patient) (*models.Patient, error) {
+func GetPatientById(id string, patients []models.Patient) int {
 	for i, p := range patients {
 		if p.ID == id {
-			return &patients[i], nil
+			return i
 		}
 	}
-	return nil, errors.New("patient not found")
+	return -1
 }

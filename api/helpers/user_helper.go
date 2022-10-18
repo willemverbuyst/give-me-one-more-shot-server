@@ -2,7 +2,6 @@ package helpers
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"give-me-one-more-shot/server/api/models"
 
@@ -30,15 +29,15 @@ func GetUsers() response {
 	return result
 }
 
-func GetUserById(id string, users []models.User) (*models.User, error) {
+func GetUserById(id string, users []models.User) int {
 	for i, u := range users {
 		idStr, err := strconv.Atoi(id)
 		if err != nil {
 			log.Fatal("Conversion of id did not work")
 		}
 		if u.ID == idStr {
-			return &users[i], nil
+			return i
 		}
 	}
-	return nil, errors.New("user not found")
+	return -1
 }
