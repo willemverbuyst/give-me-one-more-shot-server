@@ -34,6 +34,38 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "Responds with the list of all patients as JSON.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "patients"
+                ],
+                "summary": "Add patient",
+                "parameters": [
+                    {
+                        "description": "Add patient",
+                        "name": "patient",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Patient"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.PatientsResponse"
+                        }
+                    }
+                }
             }
         },
         "/patients/{id}": {
@@ -49,6 +81,42 @@ const docTemplate = `{
                     "patients"
                 ],
                 "summary": "Get patient by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Patient ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.PatientResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/responses.HTTPError"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Responds with a patient as JSON",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "patients"
+                ],
+                "summary": "Toggles active status of patient",
                 "parameters": [
                     {
                         "type": "string",
@@ -108,7 +176,7 @@ const docTemplate = `{
                 },
                 "id": {
                     "type": "string",
-                    "example": "test-uid"
+                    "example": "46cb51b9-68ae-4560-943a-8ea0ae3ddc14"
                 }
             }
         },

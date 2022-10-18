@@ -22,7 +22,7 @@ definitions:
         example: Jane
         type: string
       id:
-        example: test-uid
+        example: 46cb51b9-68ae-4560-943a-8ea0ae3ddc14
         type: string
     type: object
   responses.HTTPError:
@@ -77,6 +77,27 @@ paths:
       summary: Get patients array
       tags:
       - patients
+    post:
+      consumes:
+      - application/json
+      description: Responds with the list of all patients as JSON.
+      parameters:
+      - description: Add patient
+        in: body
+        name: patient
+        required: true
+        schema:
+          $ref: '#/definitions/models.Patient'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.PatientsResponse'
+      summary: Add patient
+      tags:
+      - patients
   /patients/{id}:
     get:
       consumes:
@@ -100,6 +121,30 @@ paths:
           schema:
             $ref: '#/definitions/responses.HTTPError'
       summary: Get patient by ID
+      tags:
+      - patients
+    patch:
+      consumes:
+      - application/json
+      description: Responds with a patient as JSON
+      parameters:
+      - description: Patient ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.PatientResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.HTTPError'
+      summary: Toggles active status of patient
       tags:
       - patients
 swagger: "2.0"

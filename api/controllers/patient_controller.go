@@ -18,7 +18,7 @@ var patients = helpers.CreateDummyPatients(users)
 // @Description  Responds with the list of all patients as JSON.
 // @Tags         patients
 // @Produce      json
-// @Success      200  {object}  responses.PatientsResponse
+// @Success      200 {object} responses.PatientsResponse
 // @Router       /patients [get]
 func GetPatients() gin.HandlerFunc {
 	return func(context *gin.Context) {
@@ -26,6 +26,15 @@ func GetPatients() gin.HandlerFunc {
 	}
 }
 
+// AddPatient godoc
+// @Summary      Add patient
+// @Description  Responds with the list of all patients as JSON.
+// @Tags         patients
+// @Accept       json
+// @Produce      json
+// @Param        patient body models.Patient true "Add patient"
+// @Success      200 {object} responses.PatientsResponse
+// @Router       /patients [post]
 func AddPatient() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		var p models.Patient
@@ -45,9 +54,9 @@ func AddPatient() gin.HandlerFunc {
 // @Tags         patients
 // @Accept       json
 // @Produce      json
-// @Param        id   path      string  true  "Patient ID"
-// @Success      200  {object}  responses.PatientResponse
-// @Failure      404  {object}  responses.HTTPError
+// @Param        id path string true "Patient ID"
+// @Success      200 {object} responses.PatientResponse
+// @Failure      404 {object} responses.HTTPError
 // @Router       /patients/{id} [get]
 func GetPatient() gin.HandlerFunc {
 	return func(context *gin.Context) {
@@ -63,6 +72,16 @@ func GetPatient() gin.HandlerFunc {
 	}
 }
 
+// UpdatePatient godoc
+// @Summary      Toggles active status of patient
+// @Description  Responds with a patient as JSON
+// @Tags         patients
+// @Accept       json
+// @Produce      json
+// @Param        id path string true "Patient ID"
+// @Success      200 {object} responses.PatientResponse
+// @Failure      404 {object} responses.HTTPError
+// @Router       /patients/{id} [patch]
 func UpdatePatient() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		id := context.Param("id")
