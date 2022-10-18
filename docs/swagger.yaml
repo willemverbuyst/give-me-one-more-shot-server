@@ -58,12 +58,34 @@ definitions:
         example: 200
         type: integer
     type: object
+  responses.RootResponse:
+    properties:
+      message:
+        example: success
+        type: string
+      status:
+        example: 200
+        type: integer
+    type: object
 info:
   contact: {}
   description: Give Me One More Shot service API in Go using Gin framework.
   title: Give Me One More Shot API
   version: "1.0"
 paths:
+  /:
+    get:
+      description: Responds with "Hello world" message.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.RootResponse'
+      summary: Test root
+      tags:
+      - root
   /patients:
     get:
       description: Responds with the list of all patients as JSON.

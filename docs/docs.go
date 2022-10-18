@@ -16,6 +16,26 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/": {
+            "get": {
+                "description": "Responds with \"Hello world\" message.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "root"
+                ],
+                "summary": "Test root",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.RootResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/patients": {
             "get": {
                 "description": "Responds with the list of all patients as JSON.",
@@ -218,6 +238,19 @@ const docTemplate = `{
                         "$ref": "#/definitions/models.Patient"
                     }
                 },
+                "message": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status": {
+                    "type": "integer",
+                    "example": 200
+                }
+            }
+        },
+        "responses.RootResponse": {
+            "type": "object",
+            "properties": {
                 "message": {
                     "type": "string",
                     "example": "success"
