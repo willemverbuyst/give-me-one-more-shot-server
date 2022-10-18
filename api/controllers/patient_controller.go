@@ -13,9 +13,16 @@ import (
 var users = helpers.GetUsers()
 var patients = helpers.CreateDummyPatients(users)
 
+// GetPatients godoc
+// @Summary      Get patients array
+// @Description  Responds with the list of all patients as JSON.
+// @Tags         patients
+// @Produce      json
+// @Success      200  {object}  responses.PatientsResponse
+// @Router       /patients [get]
 func GetPatients() gin.HandlerFunc {
 	return func(context *gin.Context) {
-		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "All patients", Data: patients})
+		context.IndentedJSON(http.StatusOK, responses.PatientsResponse{Status: http.StatusOK, Message: "success", Data: patients})
 	}
 }
 
@@ -28,33 +35,45 @@ func AddPatient() gin.HandlerFunc {
 		}
 
 		patients = append(patients, p)
-		context.IndentedJSON(http.StatusCreated, responses.UserResponse{Status: http.StatusOK, Message: "Patient created", Data: patients})
+		context.IndentedJSON(http.StatusCreated, responses.PatientsResponse{Status: http.StatusOK, Message: "success", Data: patients})
 	}
 }
 
+// GetPatient godoc
+// @Summary      Get patient by ID
+// @Description  Responds with a patient as JSON
+// @Tags         patients
+// @Accept       json
+// @Produce      json
+// @Param        id   path      string  true  "Patient ID"
+// @Success      200  {object}  responses.PatientResponse
+// @Failure      404  {object}  responses.HTTPError
+// @Router       /patients/{id} [get]
 func GetPatient() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		id := context.Param("id")
-		patient, error := helpers.GetPatientById(id, patients)
+		index := helpers.GetPatientById(id, patients)
 
-		if error != nil {
-			context.IndentedJSON(http.StatusNotFound, responses.UserResponse{Status: http.StatusNotFound, Message: "Patient not found", Data: nil})
+		if index == -1 {
+			context.IndentedJSON(http.StatusNotFound, responses.HTTPError{Status: http.StatusNotFound, Message: "fail"})
 		}
 
-		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "One patient", Data: patient})
+		patient := patients[index]
+		context.IndentedJSON(http.StatusOK, responses.PatientResponse{Status: http.StatusOK, Message: "success", Data: patient})
 	}
 }
 
 func UpdatePatient() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		id := context.Param("id")
-		patient, error := helpers.GetPatientById(id, patients)
+		index := helpers.GetPatientById(id, patients)
 
-		if error != nil {
-			context.IndentedJSON(http.StatusNotFound, responses.UserResponse{Status: http.StatusNotFound, Message: "Patient not found", Data: nil})
+		if index == -1 {
+			context.IndentedJSON(http.StatusNotFound, responses.HTTPError{Status: http.StatusNotFound, Message: "fail"})
 		}
 
+		patient := patients[index]
 		patient.Active = !patient.Active
-		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "Patient updated", Data: patient})
+		context.IndentedJSON(http.StatusOK, responses.PatientResponse{Status: http.StatusOK, Message: "success", Data: patient})
 	}
 }

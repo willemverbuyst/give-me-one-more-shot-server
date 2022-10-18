@@ -9,6 +9,6 @@ import (
 
 func WelcomeWorld() gin.HandlerFunc {
 	return func(context *gin.Context) {
-		context.IndentedJSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "Hello World", Data: nil})
+		context.IndentedJSON(http.StatusOK, responses.RootResponse{Status: http.StatusOK, Message: "Hello World"})
 	}
 }
