@@ -15,9 +15,7 @@ import (
 // @title Give Me One More Shot API
 // @version         1.0
 // @description     Give Me One More Shot service API in Go using Gin framework.
-// @license.name  Apache 2.0
-// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
-// @host      localhost:9090
+// @host						localhost:9090
 func main() {
 	db, err := config.Database()
 	if err != nil {

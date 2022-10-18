@@ -1,11 +1,105 @@
-host: localhost:9090
+definitions:
+  models.Patient:
+    properties:
+      BSN:
+        example: "999999999"
+        type: string
+      active:
+        example: true
+        type: boolean
+      birthdate:
+        type: string
+      email:
+        example: a@b.io
+        type: string
+      familyName:
+        example: Doe
+        type: string
+      gender:
+        example: Female
+        type: string
+      givenName:
+        example: Jane
+        type: string
+      id:
+        example: test-uid
+        type: string
+    type: object
+  responses.HTTPError:
+    properties:
+      messasge:
+        example: bad request
+        type: string
+      status:
+        example: 400
+        type: integer
+    type: object
+  responses.PatientResponse:
+    properties:
+      data:
+        $ref: '#/definitions/models.Patient'
+      message:
+        example: success
+        type: string
+      status:
+        example: 200
+        type: integer
+    type: object
+  responses.PatientsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/models.Patient'
+        type: array
+      message:
+        example: success
+        type: string
+      status:
+        example: 200
+        type: integer
+    type: object
 info:
   contact: {}
   description: Give Me One More Shot service API in Go using Gin framework.
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Give Me One More Shot API
   version: "1.0"
-paths: {}
+paths:
+  /patients:
+    get:
+      description: Responds with the list of all patients as JSON.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.PatientsResponse'
+      summary: Get patients array
+      tags:
+      - patients
+  /patients/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Responds with a patient as JSON
+      parameters:
+      - description: Patient ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.PatientResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.HTTPError'
+      summary: Get patient by ID
+      tags:
+      - patients
 swagger: "2.0"

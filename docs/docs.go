@@ -11,21 +11,162 @@ const docTemplate = `{
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
         "contact": {},
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {
+        "/patients": {
+            "get": {
+                "description": "Responds with the list of all patients as JSON.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "patients"
+                ],
+                "summary": "Get patients array",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.PatientsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/patients/{id}": {
+            "get": {
+                "description": "Responds with a patient as JSON",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "patients"
+                ],
+                "summary": "Get patient by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Patient ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.PatientResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/responses.HTTPError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Patient": {
+            "type": "object",
+            "properties": {
+                "BSN": {
+                    "type": "string",
+                    "example": "999999999"
+                },
+                "active": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "birthdate": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "a@b.io"
+                },
+                "familyName": {
+                    "type": "string",
+                    "example": "Doe"
+                },
+                "gender": {
+                    "type": "string",
+                    "example": "Female"
+                },
+                "givenName": {
+                    "type": "string",
+                    "example": "Jane"
+                },
+                "id": {
+                    "type": "string",
+                    "example": "test-uid"
+                }
+            }
+        },
+        "responses.HTTPError": {
+            "type": "object",
+            "properties": {
+                "messasge": {
+                    "type": "string",
+                    "example": "bad request"
+                },
+                "status": {
+                    "type": "integer",
+                    "example": 400
+                }
+            }
+        },
+        "responses.PatientResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/models.Patient"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status": {
+                    "type": "integer",
+                    "example": 200
+                }
+            }
+        },
+        "responses.PatientsResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Patient"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "status": {
+                    "type": "integer",
+                    "example": 200
+                }
+            }
+        }
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:9090",
+	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "Give Me One More Shot API",
