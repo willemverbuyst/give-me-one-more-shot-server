@@ -1,4 +1,31 @@
 definitions:
+  models.Address:
+    properties:
+      city:
+        type: string
+      geo:
+        properties:
+          lat:
+            type: string
+          lng:
+            type: string
+        type: object
+      street:
+        type: string
+      suite:
+        type: string
+      zipcode:
+        type: string
+    type: object
+  models.Company:
+    properties:
+      bs:
+        type: string
+      catchPhrase:
+        type: string
+      name:
+        type: string
+    type: object
   models.Patient:
     properties:
       BSN:
@@ -23,6 +50,27 @@ definitions:
         type: string
       id:
         example: 46cb51b9-68ae-4560-943a-8ea0ae3ddc14
+        type: string
+    type: object
+  models.User:
+    properties:
+      active:
+        type: boolean
+      address:
+        $ref: '#/definitions/models.Address'
+      company:
+        $ref: '#/definitions/models.Company'
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      username:
+        type: string
+      website:
         type: string
     type: object
   responses.HTTPError:
@@ -60,6 +108,30 @@ definitions:
     type: object
   responses.RootResponse:
     properties:
+      message:
+        example: success
+        type: string
+      status:
+        example: 200
+        type: integer
+    type: object
+  responses.UserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/models.User'
+      message:
+        example: success
+        type: string
+      status:
+        example: 200
+        type: integer
+    type: object
+  responses.UsersResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
       message:
         example: success
         type: string
@@ -169,4 +241,87 @@ paths:
       summary: Toggles active status of patient
       tags:
       - patients
+  /users:
+    get:
+      description: Responds with the list of all users as JSON.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.UsersResponse'
+      summary: Get users array
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: Responds with the list of all users as JSON.
+      parameters:
+      - description: Add user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.UsersResponse'
+      summary: Add User
+      tags:
+      - users
+  /users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Responds with a user as JSON
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.UserResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.HTTPError'
+      summary: Get user by ID
+      tags:
+      - users
+    patch:
+      consumes:
+      - application/json
+      description: Responds with a user as JSON
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.UserResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.HTTPError'
+      summary: Toggles active status of user
+      tags:
+      - users
 swagger: "2.0"
